@@ -6,123 +6,54 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/08 15:30:34 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/09 11:52:48 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-int	ft_is_quote(char c)
-{
-	if (c == '"' || c == '\'')
-		return (1);
-	return (0);
-}
-
-int	ft_is_blank(char c)
-{
-	if (c == ' ' || c == '\n' || c == '\t')
-		return (1);
-	return (0);
-}
-
-int	ft_is_parenthesis(char c)
-{
-	if (c == '(')
-		return (1);
-	return (0);
-}
-
-/*int	ft_is_separator(char c)
-{
-	if (c == '>' || c == '<' || c == '>>' || c == '|' || c == '&&' || c == '||')
-		return (1);
-	return (0);
-}
-
-int	ft_is_variable(char c)
-{
-	//check if env variable
-}*/
-
-int	ft_is_word(char *str, int i)
-{
-	if (!ft_is_quote(str[i]) && !ft_is_blank(str[i])
-		&& !ft_is_parenthesis(str[i])/* && !ft_is_separator(str[i])
-		&& !ft_is_variable(str[i])*/ && str[i] != '$')
-		return (1);
-	return (0);
-}
-
-int	ft_extract_word(char *str, int i)
-{
-	int	quote;
-
-	quote = 0;
-	while (str[i])
-	{
-		if (ft_is_quote(str[i]))
-			quote++;
-		if (!ft_is_blank(str[i]) || quote % 2 == 1)
-			printf("%c", str[i]);
-		else
-		{
-			printf("\n");
-			return (i);
-		}
-		i++;
-	}
-	return (i);
-}
-
-/*void	ft_parsing(char *line)
-{
-	int	i;
-	int	index;
-
-	i = 0;
-	index = 0;
-	while (line[i])
-	{
-		if (ft_is_word(line, i) && index == 0)
-		{
-			index = 1;
-			ft_extract_word(line, i);
-			while (ft_is_word(line, i))
-				i++;
-		}
-		else
-		{
-			index = 0;
-			i++;
-			if (!ft_is_word(line, i))
-			{
-				i++;
-				while (ft_is_word(line, i) && line[i])
-					i++;
-			}
-		}
-	}
-}*/
+#include "minishell.h"
 
 void	ft_parsing(char *line)
 {
-	int	i;
+	int		i;
+	int		j;
+	int		k;
+	int		quote;
+	int		dquote;
+	char	**tmp;
 
+	j = 0;
+	k = 0;
+	tmp = malloc(sizeof(char *) * (ft_token_qty(line) + 2));
+	tmp[k] = malloc(sizeof(char) * (ft_token_len(line, 0) + 1));
+	if (!tmp)
+		exit(1);
+	quote = 0;
+	dquote = 0;
 	i = 0;
 	while (line[i])
 	{
-		while (ft_is_blank(line[i]))
+		if (ft_is_quote(line[i]) == 1)
+			quote = !quote;
+		if (ft_is_quote(line[i]) == 2)
+			dquote = !dquote;
+		if (ft_is_blank(line[i]) && !quote && !dquote)
+		{
+			k++;
+			tmp[k] = malloc(sizeof(char) * (ft_token_len(line, 0) + 1));
+			j = 0;
 			i++;
-		ft_extract_word(line, i);
-		while (!ft_is_blank(line[i]) && line[i])
-			i++;
+		}
+		tmp[k][j] = line[i];
+		j++;
+		i++;
 	}
+	tmp[k + 1] = 0;
+	ft_sort_tokens(tmp);
 }
 
 int	main(void)
 {
-	//ft_parsing("echo test $test \' \" \" ( ");
-	ft_parsing("ARG=\"4 67 3 87 23\"; ./push_swap $ARG | ./checker_OS $ARG");
+	ft_parsing("echo test $test");
+	//ft_parsing("ARG=\"4 67 3 87 23\"; ./push_swap $ARG | ./checker_OS $ARG");
 	return (0);
 }
