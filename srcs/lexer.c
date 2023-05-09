@@ -6,7 +6,7 @@
 /*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:42:58 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/09 18:43:10 by nicolasdiam      ###   ########.fr       */
+/*   Updated: 2023/05/09 21:15:56 by nicolasdiam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ void	ft_sort_cmd_arg(char **tmp, int *i, int *temoin, char **splitted_path)
 	if (ft_check_cmd(tmp[*i], splitted_path) == 0)
 	{
 		printf("%s is a cmd\n", tmp[*i]);
-		(*i)++;
-		*temoin = 1;
-		while (!ft_is_separator(tmp[*i], 0) && tmp[*i][0] != '$')
-		{
-			printf("%s is an arg\n", tmp[*i]);
-			(*i)++;
-		}
 	}
 	else
 		printf("%s, is not a cmd\n", tmp[*i]);
+	(*i)++;
+	*temoin = 1;
+	while (!ft_is_separator(tmp[*i], 0) && tmp[*i][0] != '$')
+	{
+		printf("%s is an arg\n", tmp[*i]);
+		(*i)++;
+	}
 }
 
 void	ft_sort_dollar(char **tmp, int i)
@@ -60,39 +60,24 @@ void	ft_sort_dollar(char **tmp, int i)
 
 void	ft_sort_separators(char **tmp, int i)
 {
-	if (ft_check_separator(tmp[i]) == 1)
+	if (tmp[i][0] == '|')
 	{
 		printf("%s is a pipe\n", tmp[i]);
 	}
-	if (ft_check_separator(tmp[i]) == 2)
+	if (tmp[i][0] == '<' && tmp[i][1] != '<')
 	{
 		printf("%s is an entry redirect\n", tmp[i]);
 	}
-	if (ft_check_separator(tmp[i]) == 3)
+	if (tmp[i][0] == '<' && tmp[i][1] == '<')
 	{
 		printf("%s is an here-doc\n", tmp[i]);
 	}
-	if (ft_check_separator(tmp[i]) == 4)
+	if (tmp[i][0] == '>' && tmp[i][1] != '>')
 	{
 		printf("%s redirect the exit\n", tmp[i]);
 	}
-	if (ft_check_separator(tmp[i]) == 5)
+	if (tmp[i][0] == '>' && tmp[i][1] == '>')
 	{
 		printf("%s redirect the exit append mode\n", tmp[i]);
 	}
-}
-
-int	ft_check_separator(char *tok)
-{
-	if (tok[0] == '|')
-		return (1);
-	if (tok[0] == '<' && tok[1] != '<')
-		return (2);
-	if (tok[0] == '<' && tok[1] == '<')
-		return (3);
-	if (tok[0] == '>' && tok[1] != '>')
-		return (4);
-	if (tok[0] == '>' && tok[1] == '>')
-		return (5);
-	return (0);
 }

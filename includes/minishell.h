@@ -6,7 +6,7 @@
 /*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/09 18:44:42 by nicolasdiam      ###   ########.fr       */
+/*   Updated: 2023/05/09 21:16:29 by nicolasdiam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ void	ft_sort_separators(char **tmp, int i);
 void	ft_sort_cmd_arg(char **tmp, int *i, int *temoin, char **splitted_path);
 void	ft_sort_dollar(char **tmp, int i);
 int		ft_check_cmd(char *tok, char **splitted_path);
-int		ft_check_separator(char *tok);
 
 #endif
