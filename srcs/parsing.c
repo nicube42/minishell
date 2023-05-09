@@ -6,7 +6,7 @@
 /*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/09 18:11:47 by nicolasdiam      ###   ########.fr       */
+/*   Updated: 2023/05/09 21:06:51 by nicolasdiam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ void	ft_parsing(char *line, char **splitted_path)
 			k++;
 			tmp[k] = malloc(sizeof(char) * (ft_token_len(line, 0) + 1));
 			j = 0;
-			i++;
 		}
-		tmp[k][j] = line[i];
-		j++;
+		if (!ft_is_blank(line[i]) || quote || dquote)
+		{
+			tmp[k][j] = line[i];
+			j++;
+		}
 		i++;
 	}
 	tmp[k + 1] = 0;
@@ -79,6 +81,6 @@ int	main(int ac, char **av, char **envp)
 	splitted_path = ft_parsing_execve(envp);
 	//ft_parsing("echo frkeofroe ls | cd $test", splitted_path);
 	//ft_parsing("ARG=\"4 67 3 87 23\"; ./push_swap $ARG | ./checker_OS $ARG", splitted_path);
-	ft_parsing("<< < ls -la | grep grep moi ca $? $VAR >> >", splitted_path);
+	ft_parsing("<< < ls -la | grep 'grep moi' ca $? $VAR >> >", splitted_path);
 	return (0);
 }
