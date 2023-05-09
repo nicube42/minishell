@@ -6,13 +6,13 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/09 11:52:48 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:38:06 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_parsing(char *line)
+void	ft_parsing(char *line, char **splitted_path)
 {
 	int		i;
 	int		j;
@@ -48,12 +48,35 @@ void	ft_parsing(char *line)
 		i++;
 	}
 	tmp[k + 1] = 0;
-	ft_sort_tokens(tmp);
+	ft_sort_tokens(tmp, splitted_path);
 }
 
-int	main(void)
+char	**ft_parsing_execve(char **envp)
 {
-	ft_parsing("echo test $test");
-	//ft_parsing("ARG=\"4 67 3 87 23\"; ./push_swap $ARG | ./checker_OS $ARG");
+	int		i;
+	char	*full_path;
+	char	**splitted_path;
+
+	i = 0;
+	while (envp[++i])
+	{
+		if (!ft_strncmp(envp[i], "PATH=", 5))
+			full_path = envp[i] + 5;
+	}
+	splitted_path = ft_split(full_path, ':');
+	i = -1;
+	while (splitted_path[++i])
+		splitted_path[i] = ft_strjoin(splitted_path[i], "/");
+	return (splitted_path);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	char	**splitted_path;
+
+	splitted_path = ft_parsing_execve(envp);
+	//ft_parsing("echo frkeofroe ls | cd $test", splitted_path);
+	//ft_parsing("ARG=\"4 67 3 87 23\"; ./push_swap $ARG | ./checker_OS $ARG", splitted_path);
+	ft_parsing("< ls -la | grep grep moi ca >>", splitted_path);
 	return (0);
 }
