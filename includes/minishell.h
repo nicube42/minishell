@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/10 13:01:47 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:02:08 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include "../libft_printf/includes/libft.h"
-# include "../libft_printf/includes/ft_printf.h"
+# include "../libft/includes/libft.h"
+# include "../libft/includes/ft_printf.h"
 
 typedef struct s_vars
 {
@@ -100,5 +100,6 @@ t_redir	*ft_init_redir_token(char *content, int id);
 void	ft_print_tokens(t_vars *vars);
 t_token	*ft_create_dollar_token(char *content, int id);
 t_dollar	*ft_init_dollar_token(char *content, int id);
+char	**ft_parsing_execve(char **envp);
 
 #endif

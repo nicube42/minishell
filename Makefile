@@ -1,54 +1,47 @@
-RED = \033[0;31m
-NOCOLOR = \033[0m
-GREEN = \033[0;32m
-RED = \033[1;31m
-
-PATH_SRC =			./srcs/
-PATH_LIBFT =		./libft_printf/
-PATH_OBJS =			./objs/
-
-LIBFT = $(PATH_LIBFT)libftprintf.a
 NAME = minishell
 
-FILES = $(PATH_SRC)parsing.c $(PATH_SRC)type_detector.c $(PATH_SRC)lexer.c $(PATH_SRC)lexer_utils.c $(PATH_SRC)token_creator.c $(PATH_SRC)cmd_token.c $(PATH_SRC)dollar_token.c $(PATH_SRC)redir_token.c
-OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(FILES))
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra -lreadline -Llibft/ -lftprintf
 
-CC = clang
-CFLAGS = -Wextra -Werror -Wall
-RM = rm -rf
+SRC = main.c utils.c lexer/cmd_token.c  lexer/dollar_token.c  lexer/lexer.c  lexer/lexer_utils.c  lexer/parsing.c  lexer/redir_token.c  lexer/token_creator.c  lexer/type_detector.c execution/execute.c
+DIRS	= lexer/ parsing/ execution/
 
-all: logo $(NAME)
 
-logo :
-			@tput setaf 2; cat ascii_art/42minishell; tput setaf default
+OBJ_DIR = $(addprefix obj/, $(DIRS))
+OBJS = $(addprefix obj/, $(SRC:.c=.o))
+SRCS = $(addprefix src/, $(SRC))
+
+LIBFT = libft.a
+
+all: create_dirs $(LIBFT) $(NAME)
+
+$(LIBFT):
+	$(MAKE) -C ./libft
+
+create_dirs:
+	mkdir -p obj/
+	mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJS)
-	@$(MAKE) -C $(PATH_LIBFT)
-	@echo "Assembling $(NAME)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
-	@echo "${GREEN}✓${NOCOLOR}"
-	@echo "$(GREEN)Compilation is done$(NOCOLOR)"
+	$(CC)  $(CFLAGS) $(OBJS) -o $(NAME)
 
-$(PATH_OBJS)%.o:	$(PATH_SRC)%.c
-	@echo "Compiling $^: "
-	@mkdir -p $(PATH_OBJS)
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "${GREEN}✓${NOCOLOR}"
+obj/%.o: src/%.c
+	$(CC)  $(CFLAGS) -c -o $@ $< -I ./includes
 
 clean:
-	@echo "${RED}Cleaning objects in minishell: ${NOCOLOR}"
-	@$(RM) $(PATH_OBJS)
-	@echo "${GREEN}✓${NOCOLOR}"
+	rm -rf obj/
+	$(MAKE) -C libft/ clean
 
-fclean: clean
-	@make fclean -C $(PATH_LIBFT)
-	@echo "${RED}Cleaning all in minishell: ${NOCOLOR}"
-	@$(RM) $(NAME)
-	@echo "${GREEN}✓${NOCOLOR}"
+fclean:
+	rm -rf obj/
+	rm -f $(NAME)
+	$(MAKE) -C libft/ fclean
 
 re: fclean all
 
-norme: 
-	norminette $(PATH_SRC) $(PATH_LIBFT) ./includes
+fast:
+	$(MAKE) -j -C ./libft
+	$(MAKE) -j$(nproc)
 
-.PHONY: re all fclean clean norme
+.PHONY: all create_dirs clean fclean re fast
+
