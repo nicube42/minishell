@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/10 11:41:49 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:01:47 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,10 @@ int		ft_is_separator(char *str, int i);
 void	ft_sort_tokens(char	**tmp, t_vars *vars);
 void	ft_sort_separators(char **tmp, int i, t_vars *vars);
 void	ft_sort_cmd_arg(char **tmp, int *i, int *temoin, t_vars *vars);
+char	**ft_sort_args(char **tmp, int	*i);
 void	ft_sort_dollar(char **tmp, int i, t_vars *vars);
 int		ft_check_cmd(char *tok, t_vars *vars);
+int	ft_is_builtin(char **tmp, int i);
 
 t_cmd	*ft_init_cmd_token(char *content, int id, char **args);
 void	ft_add_token(t_vars *vars, t_token *to_add);
