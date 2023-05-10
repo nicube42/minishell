@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:42:58 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/10 11:19:34 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:44:09 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_sort_tokens(char	**tmp, t_vars *vars)
 		if (ft_is_separator(tmp[i], 0))
 			ft_sort_separators(tmp, i, vars);
 		else if (tmp[i][0] == '$')
-			ft_sort_dollar(tmp, i);
+			ft_sort_dollar(tmp, i, vars);
 		else
 			ft_sort_cmd_arg(tmp, &i, &temoin, vars);
 		if (temoin == 0)
@@ -59,21 +59,26 @@ void	ft_sort_cmd_arg(char **tmp, int *i, int *temoin, t_vars *vars)
 	char	**args;
 	int		start;
 	t_token	*token;
+	int		id;
 
+	id = 0;
 	args = malloc(sizeof(char *) * (10 + 1));
 	start = *i;
 	if (ft_is_builtin(tmp, *i))
 	{
+		id = BUILTIN_TOKEN;
 		printf("%s is a builtin\n", tmp[*i]);
 	}
 	else
 	{
 		if (ft_check_cmd(tmp[*i], vars) == 0)
 		{
+			id = CMD_TOKEN;
 			printf("%s is a cmd\n", tmp[*i]);
 		}
 		else
 		{
+			id = NOT_CMD_TOKEN;
 			printf("%s, is not a cmd\n", tmp[*i]);
 		}
 	}
@@ -87,46 +92,61 @@ void	ft_sort_cmd_arg(char **tmp, int *i, int *temoin, t_vars *vars)
 		printf("%s is an arg\n", tmp[*i]);
 		(*i)++;
 	}
-	token = ft_create_cmd_token(tmp[start], 0, args);
+	token = ft_create_cmd_token(tmp[start], id, args);
 	ft_add_token(vars, token);
 }
 
-void	ft_sort_dollar(char **tmp, int i)
+void	ft_sort_dollar(char **tmp, int i, t_vars *vars)
 {
+	int		id;
+	t_token	*token;
+
+	id = 0;
 	if (tmp[i][1] == '?')
 	{
+		id = ERR_DOLLAR_TOKEN;
 		printf("%s is $?\n", tmp[i]);
 	}
 	else
 	{
+		id = ENV_VAR_TOKEN;
 		printf("%s is an env var\n", tmp[i]);
 	}
+	token = ft_create_dollar_token(tmp[i], id);
+	ft_add_token(vars, token);
 }
 
 void	ft_sort_separators(char **tmp, int i, t_vars *vars)
 {
 	t_token	*token;
+	int		id;
 
+	id = 0;
 	if (tmp[i][0] == '|')
 	{
+		id = PIPE_TOKEN;
 		printf("%s is a pipe\n", tmp[i]);
 	}
 	else if (tmp[i][0] == '<' && tmp[i][1] != '<')
 	{
+		id = RED_ENTRY_TOKEN;
 		printf("%s is an entry redirect\n", tmp[i]);
 	}
 	else if (tmp[i][0] == '<' && tmp[i][1] == '<')
 	{
+		id = HERE_DOC_TOKEN;
 		printf("%s is an here-doc\n", tmp[i]);
 	}
 	else if (tmp[i][0] == '>' && tmp[i][1] != '>')
 	{
+		id = RED_EXIT_TOKEN;
 		printf("%s redirect the exit\n", tmp[i]);
 	}
 	else if (tmp[i][0] == '>' && tmp[i][1] == '>')
 	{
+		id = APPEND_TOKEN;
 		printf("%s redirect the exit append mode\n", tmp[i]);
 	}
-	token = ft_create_redir_token(tmp[i], 1);
+	token = ft_create_redir_token(tmp[i], id);
 	ft_add_token(vars, token);
 }

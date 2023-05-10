@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/10 11:13:05 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:41:49 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,15 @@
 # define MIN_INT -2147483648
 # define BLANK_TOKEN 0
 # define PIPE_TOKEN 1
-# define BUILTIN_TOKEN 2
+# define RED_ENTRY_TOKEN 2
+# define HERE_DOC_TOKEN 3
+# define RED_EXIT_TOKEN 4
+# define APPEND_TOKEN 5
+# define ERR_DOLLAR_TOKEN 6
+# define ENV_VAR_TOKEN 7
+# define BUILTIN_TOKEN 8
+# define CMD_TOKEN 9
+# define NOT_CMD_TOKEN 10
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -59,6 +67,14 @@ typedef struct s_redir
 	int		fdout;
 }t_redir;
 
+typedef struct s_dollar
+{
+	int		id;
+	char	*content;
+	int		fdin;
+	int		fdout;
+}t_dollar;
+
 int		ft_token_len(char *str, int i);
 int		ft_token_qty(char *str);
 void	ft_parsing(char *line, t_vars *vars);
@@ -69,7 +85,7 @@ int		ft_is_separator(char *str, int i);
 void	ft_sort_tokens(char	**tmp, t_vars *vars);
 void	ft_sort_separators(char **tmp, int i, t_vars *vars);
 void	ft_sort_cmd_arg(char **tmp, int *i, int *temoin, t_vars *vars);
-void	ft_sort_dollar(char **tmp, int i);
+void	ft_sort_dollar(char **tmp, int i, t_vars *vars);
 int		ft_check_cmd(char *tok, t_vars *vars);
 
 t_cmd	*ft_init_cmd_token(char *content, int id, char **args);
@@ -80,5 +96,7 @@ t_token	*ft_init_token(void);
 t_token	*ft_create_redir_token(char *content, int id);
 t_redir	*ft_init_redir_token(char *content, int id);
 void	ft_print_tokens(t_vars *vars);
+t_token	*ft_create_dollar_token(char *content, int id);
+t_dollar	*ft_init_dollar_token(char *content, int id);
 
 #endif

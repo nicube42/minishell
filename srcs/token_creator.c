@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 09:34:40 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/10 11:20:07 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:46:19 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,30 @@ t_token	*ft_init_token(void)
 	token->class = NULL;
 	token->id = 0;
 	return (token);
+}
+
+t_token	*ft_create_dollar_token(char *content, int id)
+{
+	t_token	*token;
+
+	token = ft_init_token();
+	token->id = id;
+	token->class = ft_init_dollar_token(content, id);
+	return (token);
+}
+
+t_dollar	*ft_init_dollar_token(char *content, int id)
+{
+	t_dollar	*dollar;
+
+	dollar = (t_dollar *)malloc(sizeof(t_dollar));
+	if (!dollar)
+		return (NULL);
+	dollar->id = id;
+	dollar->content = content;
+	dollar->fdin = STDIN_FILENO;
+	dollar->fdout = STDOUT_FILENO;
+	return (dollar);
 }
 
 t_token	*ft_create_redir_token(char *content, int id)
@@ -101,16 +125,17 @@ void	ft_print_tokens(t_vars *vars)
 	t_token	*token;
 	t_redir	*redir;
 	t_cmd	*cmd;
+	t_dollar	*dollar;
 	int		i;
 
 	token = vars->first;
 	printf("\n\n\n\n");
 	while (token)
 	{
-		if (token->id == 0)
+		if (token->id >= 8 && token->id <= 10)
 		{
 			cmd = (t_cmd *)token->class;
-			printf("%s token content (cmd)\n", cmd->content);
+			printf("%s token content (cmd)(id = %d)\n", cmd->content, token->id);
 			i = 0;
 			while (cmd->args[i])
 			{
@@ -119,10 +144,15 @@ void	ft_print_tokens(t_vars *vars)
 			}
 			printf("(cmd args)\n");
 		}
-		else if (token->id == 1)
+		else if (token->id >= 1 && token->id <= 5)
 		{
 			redir = (t_redir *)token->class;
-			printf("%s token content (redir)\n", redir->content);
+			printf("%s token content (redir)(id = %d)\n", redir->content, token->id);
+		}
+		else if (token->id >= 6 && token->id <= 7)
+		{
+			dollar = (t_dollar *)token->class;
+			printf("%s token content (dollar)(id = %d)\n", dollar->content, token->id);
 		}
 		token = token->next;
 	}
