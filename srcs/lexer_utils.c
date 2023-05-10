@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:17:26 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/09 19:47:35 by nicolasdiam      ###   ########.fr       */
+/*   Updated: 2023/05/10 10:31:27 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/09 21:06:51 by nicolasdiam      ###   ########.fr       */
+/*   Updated: 2023/05/10 10:31:26 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_parsing(char *line, char **splitted_path)
+void	ft_parsing(char *line, t_vars *vars)
 {
 	int		i;
 	int		j;
@@ -33,9 +33,15 @@ void	ft_parsing(char *line, char **splitted_path)
 	while (line[i])
 	{
 		if (ft_is_quote(line[i]) == 1)
+		{
 			quote = !quote;
+			i++;
+		}
 		if (ft_is_quote(line[i]) == 2)
+		{
 			dquote = !dquote;
+			i++;
+		}
 		if (ft_is_blank(line[i]) && !quote && !dquote)
 		{
 			k++;
@@ -50,7 +56,7 @@ void	ft_parsing(char *line, char **splitted_path)
 		i++;
 	}
 	tmp[k + 1] = 0;
-	ft_sort_tokens(tmp, splitted_path);
+	ft_sort_tokens(tmp, vars);
 }
 
 char	**ft_parsing_execve(char **envp)
@@ -74,13 +80,13 @@ char	**ft_parsing_execve(char **envp)
 
 int	main(int ac, char **av, char **envp)
 {
-	char	**splitted_path;
+	t_vars	vars;
 
 	(void) ac;
 	(void) av;
-	splitted_path = ft_parsing_execve(envp);
+	vars.splitted_path = ft_parsing_execve(envp);
 	//ft_parsing("echo frkeofroe ls | cd $test", splitted_path);
 	//ft_parsing("ARG=\"4 67 3 87 23\"; ./push_swap $ARG | ./checker_OS $ARG", splitted_path);
-	ft_parsing("<< < ls -la | grep 'grep moi' ca $? $VAR >> >", splitted_path);
+	ft_parsing("<< < ls -la | grep 'grep moi' ca | cd test $? $VAR >> >", &vars);
 	return (0);
 }

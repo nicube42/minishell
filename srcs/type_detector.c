@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_detector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:15:59 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/09 18:42:51 by nicolasdiam      ###   ########.fr       */
+/*   Updated: 2023/05/10 10:31:23 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_is_separator(char *str, int i)
 	return (0);
 }
 
-int	ft_check_cmd(char *tok, char **splitted_path)
+int	ft_check_cmd(char *tok, t_vars *vars)
 {
 	int		i;
 	char	*cmd;
@@ -44,9 +44,9 @@ int	ft_check_cmd(char *tok, char **splitted_path)
 
 	j = -1;
 	i = -1;
-	while (splitted_path[++i])
+	while (vars->splitted_path[++i])
 	{
-		cmd = ft_strjoin(splitted_path[i], tok);
+		cmd = ft_strjoin(vars->splitted_path[i], tok);
 		if (access(cmd, F_OK) == 0)
 		{
 			free(cmd);

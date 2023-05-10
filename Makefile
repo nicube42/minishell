@@ -10,7 +10,7 @@ PATH_OBJS =			./objs/
 LIBFT = $(PATH_LIBFT)libftprintf.a
 NAME = minishell
 
-FILES = $(PATH_SRC)parsing.c $(PATH_SRC)type_detector.c $(PATH_SRC)lexer.c $(PATH_SRC)lexer_utils.c
+FILES = $(PATH_SRC)parsing.c $(PATH_SRC)type_detector.c $(PATH_SRC)lexer.c $(PATH_SRC)lexer_utils.c $(PATH_SRC)token_creator.c
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(FILES))
 
 CC = clang
