@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:42:58 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/10 12:42:32 by ivautrav         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:28:51 by nicolasdiam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_sort_cmd_arg(char **tmp, int *i, int *temoin, t_vars *vars)
 	}
 	(*i)++;
 	*temoin = 1;
+	args = NULL;
 	args = ft_sort_args(tmp, i);
 	token = ft_create_cmd_token(tmp[start], id, args);
 	ft_add_token(vars, token);
@@ -72,6 +73,7 @@ char	**ft_sort_args(char **tmp, int	*i)
 		j++;
 		(*i)++;
 	}
+	args[j] = 0;
 	return (args);
 }
 

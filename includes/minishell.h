@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/10 15:02:08 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:24:50 by nicolasdiam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	ft_is_builtin(char **tmp, int i);
 t_cmd	*ft_init_cmd_token(char *content, int id, char **args);
 void	ft_add_token(t_vars *vars, t_token *to_add);
 void	ft_connect_token(t_token *list, t_token *to_add);
+void	ft_delete_all_tokens(t_vars *vars);
 t_token	*ft_create_cmd_token(char *content, int id, char **args);
 t_token	*ft_init_token(void);
 t_token	*ft_create_redir_token(char *content, int id);

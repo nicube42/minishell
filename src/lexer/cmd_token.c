@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:07:34 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/10 12:10:56 by ivautrav         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:07:59 by nicolasdiam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

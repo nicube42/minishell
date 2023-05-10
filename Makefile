@@ -1,7 +1,7 @@
 NAME = minishell
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -lreadline -Llibft/ -lftprintf
+CFLAGS = -Wall -Wextra -Wextra
 
 SRC = main.c utils.c lexer/cmd_token.c  lexer/dollar_token.c  lexer/lexer.c  lexer/lexer_utils.c  lexer/parsing.c  lexer/redir_token.c  lexer/token_creator.c  lexer/type_detector.c execution/execute.c
 DIRS	= lexer/ parsing/ execution/
@@ -23,10 +23,10 @@ create_dirs:
 	mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJS)
-	$(CC)  $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC)  $(CFLAGS) $(OBJS) -o $(NAME) -lreadline -Llibft/ -lftprintf
 
 obj/%.o: src/%.c
-	$(CC)  $(CFLAGS) -c -o $@ $< -I ./includes
+	$(CC) $(CFLAGS) -c -o $@ $< -I ./includes
 
 clean:
 	rm -rf obj/

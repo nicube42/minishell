@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:50:25 by ivautrav          #+#    #+#             */
-/*   Updated: 2023/05/10 15:00:41 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:42:58 by nicolasdiam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int ac, char *av[], char *envp[])
 	write(1, "\n", 1);
 	while (TRUE)
 	{
+		vars.first = NULL;
 		input = readline(GREEN "[ 🎓 BashMaster 🎓 ] > " RESET);
 		if (input[0] == '\0')
 			continue ;
@@ -39,9 +40,10 @@ int	main(int ac, char *av[], char *envp[])
 		{
 			ft_printf("Syntax Error detected\n");
 			continue ;
-		}*/
-		//parsing_execve(&bash);
-		//execute_command(&bash);
+		}
+		parsing_execve(&bash);
+		execute_command(&bash);*/
+		ft_delete_all_tokens(&vars);
 	}
 	return (0);
 }
