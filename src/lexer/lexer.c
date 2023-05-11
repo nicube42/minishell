@@ -6,7 +6,7 @@
 /*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:42:58 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/10 19:28:51 by nicolasdiam      ###   ########.fr       */
+/*   Updated: 2023/05/11 09:45:48 by nicolasdiam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ void	ft_sort_cmd_arg(char **tmp, int *i, int *temoin, t_vars *vars)
 	*temoin = 1;
 	args = NULL;
 	args = ft_sort_args(tmp, i);
-	token = ft_create_cmd_token(tmp[start], id, args);
+	token = ft_create_cmd_token(tmp[start], id, args, vars);
 	ft_add_token(vars, token);
+	vars->tmp_path = NULL;
 }
 
 char	**ft_sort_args(char **tmp, int	*i)

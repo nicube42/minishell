@@ -6,7 +6,7 @@
 /*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 09:34:40 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/10 19:41:21 by nicolasdiam      ###   ########.fr       */
+/*   Updated: 2023/05/11 09:40:44 by nicolasdiam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_print_tokens(t_vars *vars)
 		if (token->id >= 8 && token->id <= 10)
 		{
 			cmd = (t_cmd *)token->class;
-			printf("Token content : %s \n 			(cmd)(id = %d)\n", cmd->content, token->id);
+			printf("Token content : %s \n 			(cmd)(id = %d)(path = %s)\n", cmd->content, token->id, cmd->path);
 			i = 0;
 			printf("Cmd args content : ");
 			while (cmd->args[i])

@@ -6,23 +6,23 @@
 /*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:07:34 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/10 19:07:59 by nicolasdiam      ###   ########.fr       */
+/*   Updated: 2023/05/11 09:34:53 by nicolasdiam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_token	*ft_create_cmd_token(char *content, int id, char **args)
+t_token	*ft_create_cmd_token(char *content, int id, char **args, t_vars *vars)
 {
 	t_token	*token;
 
 	token = ft_init_token();
 	token->id = id;
-	token->class = ft_init_cmd_token(content, id, args);
+	token->class = ft_init_cmd_token(content, id, args, vars);
 	return (token);
 }
 
-t_cmd	*ft_init_cmd_token(char *content, int id, char **args)
+t_cmd	*ft_init_cmd_token(char *content, int id, char **args, t_vars *vars)
 {
 	t_cmd	*cmd;
 
@@ -32,6 +32,7 @@ t_cmd	*ft_init_cmd_token(char *content, int id, char **args)
 	cmd->id = id;
 	cmd->content = content;
 	cmd->args = args;
+	cmd->path = vars->tmp_path;
 	cmd->fdin = STDIN_FILENO;
 	cmd->fdout = STDOUT_FILENO;
 	return (cmd);

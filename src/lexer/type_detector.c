@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_detector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:15:59 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/10 12:40:11 by ivautrav         ###   ########.fr       */
+/*   Updated: 2023/05/11 09:32:31 by nicolasdiam      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	ft_check_cmd(char *tok, t_vars *vars)
 		cmd = ft_strjoin(vars->splitted_path[i], tok);
 		if (access(cmd, F_OK) == 0)
 		{
+			vars->tmp_path = cmd;
 			free(cmd);
 			return (0);
 		}
