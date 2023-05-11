@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/11 12:13:42 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/11 14:26:39 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	ft_parsing(char *line, t_vars *vars)
 	quote = 0;
 	dquote = 0;
 	i = 0;
+	while (ft_is_blank(line[i]))
+			i++;
 	while (line[i])
 	{
 		if (ft_is_quote(line[i]) == 1)
@@ -57,7 +59,13 @@ void	ft_parsing(char *line, t_vars *vars)
 			tmp[k][j + 1] = '\0';
 			j++;
 		}
-		i++;
+		if (ft_is_blank(line[i]) && !quote && !dquote)
+		{
+			while (ft_is_blank(line[i]))
+				i++;
+		}
+		else
+			i++;
 	}
 	tmp[k + 1] = 0;
 	ft_sort_tokens(tmp, vars);

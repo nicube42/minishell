@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:42:58 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/11 11:42:18 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/11 14:28:24 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	**ft_sort_args(char **tmp, int	*i)
 	char	**args;
 	int		j;
 
-	args = malloc(sizeof(char *) * (10 + 1));
+	args = malloc(sizeof(char *) * (100 + 1));
 	j = 0;
 	while (tmp[*i] && !ft_is_separator(tmp[*i], 0) && tmp[*i][0] != '$')
 	{
