@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/10 12:41:39 by ivautrav         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:13:42 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,14 @@ void	ft_parsing(char *line, t_vars *vars)
 			dquote = !dquote;
 			i++;
 		}
-		if (ft_is_blank(line[i]) && !quote && !dquote)
+		if (line[i - 1] != '>' && line[i - 1] != '<')
 		{
-			k++;
-			tmp[k] = malloc(sizeof(char) * (ft_token_len(line, 0) + 1));
-			j = 0;
+			if (ft_is_blank(line[i]) && !quote && !dquote)
+			{
+				k++;
+				tmp[k] = malloc(sizeof(char) * (ft_token_len(line, 0) + 1));
+				j = 0;
+			}
 		}
 		if (!ft_is_blank(line[i]) || quote || dquote)
 		{

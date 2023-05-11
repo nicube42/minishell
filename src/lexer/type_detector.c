@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_detector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:15:59 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/11 09:32:31 by nicolasdiam      ###   ########.fr       */
+/*   Updated: 2023/05/11 12:29:08 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,19 @@ int	ft_check_cmd(char *tok, t_vars *vars)
 
 int	ft_is_builtin(char **tmp, int i)
 {
-	if (!ft_strncmp(tmp[i], "echo", 4))
+	if (!ft_strncmp(tmp[i], "echo", 5))
 		return (1);
-	if (!ft_strncmp(tmp[i], "cd", 2))
+	if (!ft_strncmp(tmp[i], "cd", 3))
 		return (1);
-	if (!ft_strncmp(tmp[i], "pwd", 3))
+	if (!ft_strncmp(tmp[i], "pwd", 4))
 		return (1);
-	if (!ft_strncmp(tmp[i], "export", 6))
+	if (!ft_strncmp(tmp[i], "export", 5))
 		return (1);
-	if (!ft_strncmp(tmp[i], "unset", 5))
+	if (!ft_strncmp(tmp[i], "unset", 6))
 		return (1);
-	if (!ft_strncmp(tmp[i], "env", 3))
+	if (!ft_strncmp(tmp[i], "env", 4))
 		return (1);
-	if (!ft_strncmp(tmp[i], "exit", 4))
+	if (!ft_strncmp(tmp[i], "exit", 5))
 		return (1);
 	return (0);
 }
