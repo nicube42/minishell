@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/12 10:48:18 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:31:21 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_parsing(char *line, t_vars *vars)
 				k++;
 				tmp[k] = malloc(sizeof(char) * (ft_token_len(line, 0) + 1));
 				j = 0;
+				i++;
 			}
 		}
 		if (!ft_is_blank(line[i]) || quote || dquote)
@@ -60,15 +61,23 @@ void	ft_parsing(char *line, t_vars *vars)
 			tmp[k][j + 1] = '\0';
 			j++;
 		}
-		if (line[i] == '|' && !quote && !dquote)
+		if (line[i + 1] == '|' && !quote && !dquote)
 		{
 			k++;
 			tmp[k] = malloc(sizeof(char) * (ft_token_len(line, 0) + 1));
 			j = 0;
 		}
+		if (line[i] == '|' && !quote && !dquote)
+		{
+			k++;
+			tmp[k] = malloc(sizeof(char) * (ft_token_len(line, 0) + 1));
+			j = 0;
+			if (ft_is_blank(line[i + 1]))
+				i++;
+		}
 		if (ft_is_blank(line[i]) && !quote && !dquote)
 		{
-			while (ft_is_blank(line[i]))
+			while (ft_is_blank(line[i]) || quote || dquote)
 				i++;
 		}
 		else
