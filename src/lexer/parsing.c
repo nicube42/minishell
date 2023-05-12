@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/12 11:31:21 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:59:33 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_parsing(char *line, t_vars *vars)
 
 	j = 0;
 	k = 0;
-	tmp = malloc(sizeof(char *) * (ft_token_qty(line) + 2));
+	tmp = malloc(sizeof(char *) * (ft_token_qty(line) + 1));
 	tmp[k] = malloc(sizeof(char) * (ft_token_len(line, 0) + 1));
 	if (!tmp)
 		exit(1);

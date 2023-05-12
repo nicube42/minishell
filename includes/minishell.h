@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/12 10:50:44 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:20:05 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,9 @@ t_token		*ft_create_dollar_token(char *content, int id);
 t_dollar	*ft_init_dollar_token(char *content, int id);
 
 void		ft_check_syntax(t_vars *vars);
+int			ft_wrong_cmd_error(t_vars *vars);
+int			ft_unclosed_quote_error(t_vars *vars);
+int			ft_pipe_syntax_error(t_vars *vars);
+int			ft_pipe_syntax_error_2(t_vars *vars);
 
 #endif
