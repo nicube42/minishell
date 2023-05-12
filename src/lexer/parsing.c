@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/11 14:26:39 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:48:18 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_parsing(char *line, t_vars *vars)
 	tmp[k] = malloc(sizeof(char) * (ft_token_len(line, 0) + 1));
 	if (!tmp)
 		exit(1);
+	vars->quote_error = 0;
 	quote = 0;
 	dquote = 0;
 	i = 0;
@@ -34,12 +35,12 @@ void	ft_parsing(char *line, t_vars *vars)
 			i++;
 	while (line[i])
 	{
-		if (ft_is_quote(line[i]) == 1)
+		if (ft_is_quote(line[i]) == 2)
 		{
 			quote = !quote;
 			i++;
 		}
-		if (ft_is_quote(line[i]) == 2)
+		if (ft_is_quote(line[i]) == 1)
 		{
 			dquote = !dquote;
 			i++;
@@ -59,6 +60,12 @@ void	ft_parsing(char *line, t_vars *vars)
 			tmp[k][j + 1] = '\0';
 			j++;
 		}
+		if (line[i] == '|' && !quote && !dquote)
+		{
+			k++;
+			tmp[k] = malloc(sizeof(char) * (ft_token_len(line, 0) + 1));
+			j = 0;
+		}
 		if (ft_is_blank(line[i]) && !quote && !dquote)
 		{
 			while (ft_is_blank(line[i]))
@@ -67,6 +74,8 @@ void	ft_parsing(char *line, t_vars *vars)
 		else
 			i++;
 	}
+	if (dquote || quote)
+		vars->quote_error = !vars->quote_error;
 	tmp[k + 1] = 0;
 	ft_sort_tokens(tmp, vars);
 }
@@ -89,16 +98,3 @@ char	**ft_parsing_execve(char **envp)
 		splitted_path[i] = ft_strjoin(splitted_path[i], "/");
 	return (splitted_path);
 }
-
-/*int	main(int ac, char **av, char **envp)
-{
-	t_vars	vars;
-
-	(void) ac;
-	(void) av;
-	vars.splitted_path = ft_parsing_execve(envp);
-	//ft_parsing("echo frkeofroe ls | cd $test", splitted_path);
-	//ft_parsing("ARG=\"4 67 3 87 23\"; ./push_swap $ARG | ./checker_OS $ARG", splitted_path);
-	ft_parsing("<< < ls -la | grep 'grep moi' ca | cd test $? $VAR >> >", &vars);
-	return (0);
-}*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constant.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:01:14 by ivautrav          #+#    #+#             */
-/*   Updated: 2023/05/05 05:25:47 by ivautrav         ###   ########.fr       */
+/*   Updated: 2023/05/12 09:57:40 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef enum e_bool
 // Colors
 
 # define GREEN	"\033[0;32m"
+# define RED	"\033[0;31m"
 # define RESET	"\033[0m"
 
 #endif

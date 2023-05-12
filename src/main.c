@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:50:25 by ivautrav          #+#    #+#             */
-/*   Updated: 2023/05/12 08:50:34 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:02:34 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int ac, char *av[], char *envp[])
 
 	(void) ac;
 	(void) av;
-	vars.tmp_path = NULL;
 	vars.splitted_path = ft_parsing_execve(envp);
 	using_history();
 	write(1, "\n", 1);
@@ -37,12 +36,8 @@ int	main(int ac, char *av[], char *envp[])
 		ft_parsing(input, &vars);
 		(void) tmp;
 		tmp = vars.first;
-		/*if (!check_syntax(&bash))
-		{
-			ft_printf("Syntax Error detected\n");
-			continue ;
-		}
-		parsing_execve(&bash);
+		ft_check_syntax(&vars);
+		/*parsing_execve(&bash);
 		execute_command(&bash);*/
 		ft_delete_all_tokens(&vars);
 	}
