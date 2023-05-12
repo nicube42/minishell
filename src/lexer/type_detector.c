@@ -47,7 +47,7 @@ int	ft_check_cmd(char *tok, t_vars *vars)
 		cmd = ft_strjoin(vars->splitted_path[i], tok);
 		if (access(cmd, F_OK) == 0)
 		{
-			vars->tmp_path = cmd;
+			vars->tmp_path = ft_strdup(cmd);
 			free(cmd);
 			return (0);
 		}

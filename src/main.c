@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:50:25 by ivautrav          #+#    #+#             */
-/*   Updated: 2023/05/11 11:41:52 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/12 08:50:34 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char *av[], char *envp[])
 
 	(void) ac;
 	(void) av;
+	vars.tmp_path = NULL;
 	vars.splitted_path = ft_parsing_execve(envp);
 	using_history();
 	write(1, "\n", 1);

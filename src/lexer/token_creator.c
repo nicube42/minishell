@@ -102,6 +102,7 @@ void	ft_delete_all_tokens(t_vars *vars)
 			i = 0;
 			free(cmd->content);
 			cmd->content = NULL;
+			free(cmd->path);
 			while (cmd->args[i])
 			{
 				free (cmd->args[i]);
