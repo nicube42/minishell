@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:17:26 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/10 12:19:52 by ivautrav         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:04:11 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ int	ft_token_qty(char *str)
 				i++;
 			k++;
 		}
+		if (str[i + 1] == '|' && !quote && !dquote)
+			k++;
+		if (str[i] == '|' && !quote && !dquote)
+			k++;
 		i++;
 	}
 	return (k);
