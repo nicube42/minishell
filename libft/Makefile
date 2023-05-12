@@ -44,7 +44,6 @@ LIBFT_FILES		=	$(LIBFT_DIR)/ft_atof.c \
 					$(LIBFT_DIR)/ft_substr.c \
 					$(LIBFT_DIR)/ft_tolower.c \
 					$(LIBFT_DIR)/ft_toupper.c \
-					$(LIBFT_DIR)/ft_isduplicate.c \
 
 FT_PRINTF_FILES	=	$(PRINTF_DIR)/ft_eval_format.c \
 					$(PRINTF_DIR)/ft_format_specifiers.c \

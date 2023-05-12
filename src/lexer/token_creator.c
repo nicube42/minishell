@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_creator.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 09:34:40 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/11 12:10:51 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:03:47 by ivautrav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

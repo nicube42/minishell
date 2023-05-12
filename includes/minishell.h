@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/12 14:20:05 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:35:32 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ typedef struct s_vars
 	char			**splitted_path;
 	int				quote_error;
 	char			*tmp_path;
-	char			*tmp_stdin;
-	char			*tmp_stdout;
+	int				fdout;
+	int				fdin;
+	int				fdin_orig;
+	int				fdout_orig;
 }t_vars;
 
 typedef struct s_token

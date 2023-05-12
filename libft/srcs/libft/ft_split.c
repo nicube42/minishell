@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:10:32 by ndiamant          #+#    #+#             */
-/*   Updated: 2022/10/17 22:50:13 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/05 07:30:15 by ivautrav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 11:32:45 by ndiamant          #+#    #+#             */
-/*   Updated: 2022/10/17 22:46:55 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/09 08:11:36 by ivautrav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

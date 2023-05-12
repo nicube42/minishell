@@ -3,89 +3,138 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 06:50:06 by ivautrav          #+#    #+#             */
-/*   Updated: 2023/05/10 11:18:45 by ivautrav         ###   ########.fr       */
+/*   Updated: 2023/05/12 19:28:19 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <bashmaster.h>
+#include <minishell.h>
 
-static char	*check_infile(t_bash *bash)
+static char	*check_infile(t_vars *vars)
 {
-	(void) bash;
-	/*char	*infile_name;
+	char	*infile_name;
+	t_token	*tok;
 
-	infile_name = get_infile_name(bash);
+	tok = vars->first;
+	while (tok && tok->id != RED_ENTRY_TOKEN)
+		tok = tok->next;
+	if (tok == NULL)
+		return (NULL);
+	infile_name = ((t_redir *)tok->class)->content + 1;
 	if (infile_name == NULL)
 		return (NULL);
 	if (access(infile_name, F_OK) != 0)
 		return ("");
-	return (infile_name);*/
-	return (NULL);
+	return (infile_name);
 }
 
-t_bool	execute_command(t_bash *bash)
+int	get_nb_commands(t_vars *vars)
 {
-	int		fdpipe[2];
+	t_token	*tmp;
+	int		cnt;
+
+	cnt = 0;
+	tmp = vars->first;
+	while (tmp != NULL)
+	{
+		if (tmp->id == CMD_TOKEN)
+			cnt++;
+		tmp = tmp->next;
+	}
+	return (cnt);
+}
+
+t_bool	execute_command(t_vars *vars)
+{
 	int		*childs;
 	int		ret;
+	t_token	*tok;
 	int		i;
 	char	*ret_file;
+	int		fdpipe[2];
+
 	//char	output[4096];
 
-	bash->fdin_orig = dup(STDIN_FILENO);
-	bash->fdout_orig = dup(STDOUT_FILENO);
-	ret_file = check_infile(bash);
+	(void) vars;
+	vars->fdin_orig = dup(STDIN_FILENO);
+	vars->fdout_orig = dup(STDOUT_FILENO);
+	ret_file = check_infile(vars);
 	if (ret_file != NULL && ft_strncmp(ret_file, "", 1) == 0)
 		return (FALSE);
 	if (ret_file != NULL)
 	{
-		printf("%s\n", ret_file);
-		bash->fdin = open(ret_file, O_RDONLY);
+		vars->fdin = open(ret_file, O_RDONLY);
 	}
 	else
-		bash->fdin = dup(bash->fdin_orig);
+		vars->fdin = dup(vars->fdin_orig);
 	i = 0;
-	childs = (int *) malloc(sizeof(int) * bash->nb_commands);
+	childs = (int *) malloc(sizeof(int) * get_nb_commands(vars));
 	if (childs == NULL)
 		return (FALSE);
-	while (i < bash->nb_commands)
+	while (i < get_nb_commands(vars))
 	{
-		dup2(bash->fdin, STDIN_FILENO);
-		close(bash->fdin);
-		if (i != bash->nb_commands - 1)
+		if (i == get_nb_commands(vars) - 1)
 		{
-			pipe(fdpipe);
-			bash->fdout = fdpipe[1];
-			bash->fdin = fdpipe[0];
+			vars->fdout = dup(vars->fdout_orig);
 		}
 		else
-			bash->fdout = dup(bash->fdout_orig);
-		dup2(bash->fdout, STDOUT_FILENO);
-		close(bash->fdout);
+		{
+			pipe(fdpipe);
+		}
 		ret = fork();
 		childs[i] = ret;
 		if (ret == 0)
 		{
-			if (bash->commands[i].exec_path == NULL)
+			dup2(vars->fdin, STDIN_FILENO);
+			dup2(fdpipe[1], STDOUT_FILENO);
+			close(fdpipe[0]);
+			close(fdpipe[1]);
+			tok = vars->first;
+			while (tok && tok->next)
+				tok = tok->next;
+			if (tok->id != CMD_TOKEN)
 				exit(1);
-			execve(bash->commands[i].exec_path, bash->commands[i].args, \
-					bash->envp);
+			((t_cmd *)tok->class)->args[0] = ((t_cmd *)tok->class)->path;
+			execve(((t_cmd *)tok->class)->path, ((t_cmd *)tok->class)->args, \
+					vars->splitted_path);
 			perror("Error Execution");
 			exit(1);
+		}
+		else
+		{
+			ret = fork();
+			childs[i] = ret;
+			if (ret == 0)
+			{
+				printf("test\n");
+				dup2(fdpipe[0], STDIN_FILENO);
+				close(fdpipe[1]);
+				close(fdpipe[0]);
+				dup2(vars->fdout, STDOUT_FILENO);
+				tok = vars->first;
+				while (tok && tok->next)
+					tok = tok->next;
+				if (tok->id != CMD_TOKEN)
+					exit(1);
+				((t_cmd *)tok->class)->args[0] = ((t_cmd *)tok->class)->path;
+				execve(((t_cmd *)tok->class)->path, ((t_cmd *)tok->class)->args, \
+					vars->splitted_path);
+			}
 		}
 		i++;
 	}
 	i = -1;
-	while (++i < bash->nb_commands)
-		waitpid(childs[i], NULL, 0);
-	dup2(bash->fdin_orig, 0);
-	dup2(bash->fdout_orig, 1);
-	close(bash->fdin_orig);
-	close(bash->fdout_orig);
-	free(ret_file);
+	//while (++i < get_nb_commands(vars))
+		waitpid(childs[0], NULL, 0);
+		waitpid(childs[1], NULL, 0);
+	dup2(vars->fdin_orig, 0);
+	dup2(vars->fdout_orig, 1);
+	close(vars->fdin_orig);
+	close(vars->fdout_orig);
+	//free(ret_file);
 	free(childs);
 	return (TRUE);
 }

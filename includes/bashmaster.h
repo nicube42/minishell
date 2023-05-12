@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bashmaster.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:01:49 by ivautrav          #+#    #+#             */
-/*   Updated: 2023/05/10 15:01:44 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/11 21:32:59 by ivautrav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <constant.h>
+# include <tokens.h>
+# include <minishell.h>
 # include "../libft/includes/libft.h"
 # include "../libft/includes/ft_printf.h"
 
@@ -46,9 +48,8 @@ t_bool	extract_tokens(t_bash *bash, char *input);
 t_bool	check_syntax(t_bash *bash);
 
 void	parsing_execve(t_bash *bash);
-char	*get_command_fullpath(t_bash *bash, char *command);
 
-t_bool	execute_command(t_bash *bash);
+t_bool	execute_command(t_vars *vars);
 t_bool	set_commands(t_bash *bash);
 
 char	*get_infile_name(t_bash *bash);
