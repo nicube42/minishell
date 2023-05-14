@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 09:27:44 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/12 14:50:28 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:33:15 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_pipe_syntax_error_2(t_vars *vars)
 
 int	ft_unclosed_quote_error(t_vars *vars)
 {
-	if (vars->quote_error)
+	if (vars->dquote || vars->quote)
 	{
 		printf(RED "Unclosed quote detected\n" RESET);
 		return (1);

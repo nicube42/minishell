@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/12 18:35:32 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:33:12 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ typedef struct s_vars
 {
 	struct s_token	*first;
 	char			**splitted_path;
-	int				quote_error;
+	int				quote;
+	int				dquote;
+	char			**tmp_tok;
+	int				j;
 	char			*tmp_path;
 	int				fdout;
 	int				fdin;
@@ -122,5 +125,14 @@ int			ft_wrong_cmd_error(t_vars *vars);
 int			ft_unclosed_quote_error(t_vars *vars);
 int			ft_pipe_syntax_error(t_vars *vars);
 int			ft_pipe_syntax_error_2(t_vars *vars);
+
+int			ft_red_exit_to_string(char *line, t_vars *vars, int i);
+int			ft_append_to_string(char *line, t_vars *vars, int i);
+int			ft_pipe_to_string(char *line, t_vars *vars, int i);
+int			ft_parse_inside_quote(char *line, t_vars *vars, int i);
+int			ft_cmd_to_string(char *line, t_vars *vars, int i);
+
+int			ft_skip_blank(char *line, int i);
+int			ft_handle_quote(char *line, t_vars *vars, int i);
 
 #endif

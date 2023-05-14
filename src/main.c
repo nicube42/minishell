@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivautrav <ivautrav@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:50:25 by ivautrav          #+#    #+#             */
-/*   Updated: 2023/05/12 14:45:04 by ivautrav         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:33:14 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	main(int ac, char *av[], char *envp[])
 		(void) tmp;
 		tmp = vars.first;
 		ft_check_syntax(&vars);
-		//parsing_execve(&bash);
-		execute_command(&vars);
+		//execute_command(&vars);
 		ft_delete_all_tokens(&vars);
 	}
 	return (0);

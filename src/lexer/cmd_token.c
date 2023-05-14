@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolasdiamantis <nicolasdiamantis@stud    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:07:34 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/11 09:34:53 by nicolasdiam      ###   ########.fr       */
+/*   Updated: 2023/05/14 19:33:44 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

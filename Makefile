@@ -3,7 +3,7 @@ NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c utils.c lexer/cmd_token.c  lexer/dollar_token.c  lexer/lexer.c  lexer/lexer_utils.c  lexer/parsing.c  lexer/redir_token.c  lexer/token_creator.c  lexer/type_detector.c lexer/check_syntax.c execution/execute.c
+SRC = main.c utils.c lexer/cmd_token.c  lexer/dollar_token.c  lexer/lexer.c  lexer/lexer_utils.c  lexer/parsing.c  lexer/redir_token.c  lexer/token_creator.c  lexer/type_detector.c lexer/check_syntax.c lexer/parsing_utils.c execution/execute.c
 DIRS	= lexer/ parsing/ execution/
 
 
