@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:17:26 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/12 14:56:30 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:19:52 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,10 @@ int	ft_token_qty(char *str)
 				i++;
 			k++;
 		}
-		if (str[i + 1] == '|' && !quote && !dquote)
-			k++;
-		if (str[i] == '|' && !quote && !dquote)
-			k++;
+		else if (ft_is_separator(str, i) && !quote && !dquote)
+			k += 2;
 		i++;
 	}
+	printf("%d\n", k);
 	return (k);
 }

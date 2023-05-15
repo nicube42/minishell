@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_detector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:15:59 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/14 19:33:11 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:23:29 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	ft_check_cmd(char *tok, t_vars *vars)
 		if (access(cmd, F_OK) == 0)
 		{
 			vars->tmp_path = ft_strdup(cmd);
-			printf("%s", vars->tmp_path);
 			free(cmd);
 			return (0);
 		}

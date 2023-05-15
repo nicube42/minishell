@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/14 19:33:17 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:53:45 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	ft_red_entry_to_string(char *line, t_vars *vars, int i)
 		count++;
 		i++;
 	}
+	i = ft_skip_blank(line, i);
 	vars->j++;
 	return (i);
 }
@@ -65,7 +66,7 @@ void	ft_parsing(char *line, t_vars *vars)
 {
 	int		i;
 
-	vars->tmp_tok = ft_calloc(/*ft_token_qty(line) + 1*/ 100, sizeof(char *));
+	vars->tmp_tok = ft_calloc(ft_token_qty(line) + 2, sizeof(char *));
 	i = 0;
 	vars->j = 0;
 	vars->quote = 0;

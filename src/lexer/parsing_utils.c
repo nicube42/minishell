@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:06:17 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/14 19:33:16 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:12:20 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,23 @@ int	ft_parse_inside_quote(char *line, t_vars *vars, int i)
 	int	count;
 
 	count = 0;
-	vars->tmp_tok[vars->j] = ft_calloc(100, sizeof(char));
+	while (line[i])
+	{
+		if (vars->quote || vars->dquote)
+			count++;
+		i++;
+	}
+	vars->tmp_tok[vars->j] = ft_calloc(count + 2, sizeof(char));
+	i -= count;
+	count = 0;
 	while (line[i])
 	{
 		i = ft_handle_quote(line, vars, i);
 		if (vars->quote || vars->dquote)
-        {
-		    vars->tmp_tok[vars->j][count] = line[i];
-            count++;
-        }
+		{
+			vars->tmp_tok[vars->j][count] = line[i];
+			count++;
+		}
 		i++;
 	}
 	vars->j++;
@@ -99,9 +107,18 @@ int	ft_parse_inside_quote(char *line, t_vars *vars, int i)
 int	ft_cmd_to_string(char *line, t_vars *vars, int i)
 {
 	int	count;
+	int	start;
 
+	start = i;
 	count = 0;
-	vars->tmp_tok[vars->j] = ft_calloc(3, sizeof(char));
+	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i))
+	{
+		i++;
+		count++;
+	}
+	vars->tmp_tok[vars->j] = ft_calloc(count + 2, sizeof(char));
+	count = 0;
+	i = start;
 	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i))
 	{
 		vars->tmp_tok[vars->j][count] = line[i];

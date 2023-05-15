@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:42:58 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/14 19:33:08 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:08:32 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,14 @@ char	**ft_sort_args(char **tmp, int	*i)
 	char	**args;
 	int		j;
 
-	args = malloc(sizeof(char *) * (100 + 1));
+	j = 0;
+	while (tmp[*i] && !ft_is_separator(tmp[*i], 0) && tmp[*i][0] != '$')
+	{
+		j++;
+		(*i)++;
+	}
+	args = calloc(j + 1, sizeof(char *));
+	*i -= j;
 	j = 0;
 	while (tmp[*i] && !ft_is_separator(tmp[*i], 0) && tmp[*i][0] != '$')
 	{
@@ -74,12 +81,12 @@ char	**ft_sort_args(char **tmp, int	*i)
 		j++;
 		(*i)++;
 	}
-	args[j] = 0;
+	/*args[j] = 0;
 	if (j > 0)
 	{
 		args[j] = ft_strdup(args[j - 1]);
 		args[j + 1] = 0;
-	}
+	}*/
 	return (args);
 }
 
