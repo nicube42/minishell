@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:42:58 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/15 15:08:32 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:47:38 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_sort_tokens(char	**tmp, t_vars *vars)
 			i++;
 		temoin = 0;
 	}
-	ft_print_tokens(vars);
 }
 
 void	ft_sort_cmd_arg(char **tmp, int *i, int *temoin, t_vars *vars)
@@ -77,7 +76,7 @@ char	**ft_sort_args(char **tmp, int	*i)
 	j = 0;
 	while (tmp[*i] && !ft_is_separator(tmp[*i], 0) && tmp[*i][0] != '$')
 	{
-		args[j] = tmp[*i];
+		args[j] = ft_strdup(tmp[*i]);
 		j++;
 		(*i)++;
 	}

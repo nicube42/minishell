@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 09:34:40 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/14 19:33:09 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:46:14 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,32 +100,35 @@ void	ft_delete_all_tokens(t_vars *vars)
 		{
 			cmd = (t_cmd *)token->class;
 			i = 0;
-			free(cmd->content);
+			//free(cmd->content);
 			cmd->content = NULL;
-			free(cmd->path);
+			//free(cmd->path);
 			while (cmd->args[i])
 			{
-				free (cmd->args[i]);
+				//free (cmd->args[i]);
+				cmd->args[i] = NULL;
 				i++;
 			}
-			free(cmd);
+			//free(cmd);
 		}
 		else if (token->id >= 1 && token->id <= 5)
 		{
 			redir = (t_redir *)token->class;
-			free (redir);
+			redir->content = 0;
+			redir->id = 0;
+			//free (redir);
+			redir = 0;
 		}
 		else if (token->id >= 6 && token->id <= 7)
 		{
 			dollar = (t_dollar *)token->class;
-			free (dollar);
+			dollar->content = 0;
+			dollar ->id = 0;
+			//free (dollar);
+			dollar = 0;
 		}
-		if (token->prev)
-		{
-			free(token->prev);
-			token = token->next;
-		}
-		else
-			return ;
+		token->id = 0;
+		token->class = 0;
+		token = token->next;
 	}
 }
