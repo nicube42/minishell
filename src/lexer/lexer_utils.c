@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:17:26 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/15 16:19:52 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:42:25 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_token_qty(char *str)
 	int	k;
 
 	i = 0;
-	k = 0;
+	k = 1;
 	quote = 0;
 	dquote = 0;
 	while (str[i])
@@ -53,12 +53,12 @@ int	ft_token_qty(char *str)
 		{
 			while (ft_is_blank(str[i]))
 				i++;
-			k++;
 		}
 		else if (ft_is_separator(str, i) && !quote && !dquote)
-			k += 2;
+			k += 1;
+		else if (str[i] == '$')
+			k += 1;
 		i++;
 	}
-	printf("%d\n", k);
 	return (k);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/15 15:53:45 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:45:30 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@ int	ft_skip_blank(char *line, int i)
 
 int	ft_handle_quote(char *line, t_vars *vars, int i)
 {
-	if (ft_is_quote(line[i]) == 2)
+	while (ft_is_quote(line[i]))
 	{
-		vars->quote = !vars->quote;
-		i++;
-	}
-	if (ft_is_quote(line[i]) == 1)
-	{
-		vars->dquote = !vars->dquote;
-		i++;
+		if (ft_is_quote(line[i]) == 2)
+		{
+			vars->quote = !vars->quote;
+			i++;
+		}
+		if (ft_is_quote(line[i]) == 1)
+		{
+			vars->dquote = !vars->dquote;
+			i++;
+		}
 	}
 	return (i);
 }
@@ -41,7 +44,7 @@ int	ft_red_entry_to_string(char *line, t_vars *vars, int i)
 	count = 0;
 	i++;
 	i = ft_skip_blank(line, i);
-	while (!ft_is_blank(line[i]) && line[i] && !ft_is_separator(line, i))
+	while (!ft_is_blank(line[i]) && line[i] && !ft_is_separator(line, i) && line[i] != '$')
 	{
 		count++;
 		i++;
@@ -51,7 +54,7 @@ int	ft_red_entry_to_string(char *line, t_vars *vars, int i)
 	count = 0;
 	vars->tmp_tok[vars->j][count] = '<';
 	count++;
-	while (!ft_is_blank(line[i]) && line[i] && !ft_is_separator(line, i))
+	while (!ft_is_blank(line[i]) && line[i] && !ft_is_separator(line, i) && line[i] != '$')
 	{
 		vars->tmp_tok[vars->j][count] = line[i];
 		count++;
@@ -83,6 +86,8 @@ void	ft_parsing(char *line, t_vars *vars)
 			i = ft_append_to_string(line, vars, i);
 		else if (ft_is_separator(line, i) == 5 && !vars->quote && !vars->dquote)
 			i = ft_pipe_to_string(line, vars, i);
+		else if (line[i] == '$')
+			i = ft_dollard_to_string(line, vars, i);
 		else if (vars->quote || vars->dquote)
 			i = ft_parse_inside_quote(line, vars, i);
 		else

@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 09:27:44 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/15 15:13:30 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:27:11 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <bashmaster.h>
 
-void	ft_check_syntax(t_vars *vars)
+int	ft_check_syntax(t_vars *vars)
 {	
 	if (ft_unclosed_quote_error(vars))
-		return ;
+		return (0);
 	if (ft_pipe_syntax_error(vars))
-		return ;
+		return (0);
 	if (ft_pipe_syntax_error_2(vars))
-		return ;
+		return (0);
 	if (ft_wrong_cmd_error(vars))
-		return ;
+		return (0);
+	return (1);
 }
 
 int	ft_pipe_syntax_error(t_vars *vars)

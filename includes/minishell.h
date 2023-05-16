@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/14 19:33:12 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:45:40 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ t_redir		*ft_init_redir_token(char *content, int id);
 t_token		*ft_create_dollar_token(char *content, int id);
 t_dollar	*ft_init_dollar_token(char *content, int id);
 
-void		ft_check_syntax(t_vars *vars);
+int			ft_check_syntax(t_vars *vars);
 int			ft_wrong_cmd_error(t_vars *vars);
 int			ft_unclosed_quote_error(t_vars *vars);
 int			ft_pipe_syntax_error(t_vars *vars);
@@ -134,5 +134,7 @@ int			ft_cmd_to_string(char *line, t_vars *vars, int i);
 
 int			ft_skip_blank(char *line, int i);
 int			ft_handle_quote(char *line, t_vars *vars, int i);
+
+int			ft_dollard_to_string(char *line, t_vars *vars, int i);
 
 #endif
