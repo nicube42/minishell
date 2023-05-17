@@ -6,14 +6,14 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 06:50:06 by ivautrav          #+#    #+#             */
-/*   Updated: 2023/05/12 19:28:19 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/17 10:22:11 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <bashmaster.h>
 #include <minishell.h>
 
-static char	*check_infile(t_vars *vars)
+/*static char	*check_infile(t_vars *vars)
 {
 	char	*infile_name;
 	t_token	*tok;
@@ -45,11 +45,12 @@ int	get_nb_commands(t_vars *vars)
 		tmp = tmp->next;
 	}
 	return (cnt);
-}
+}*/
 
 t_bool	execute_command(t_vars *vars)
 {
-	int		*childs;
+	(void)	vars;
+	/*int		*childs;
 	int		ret;
 	t_token	*tok;
 	int		i;
@@ -137,4 +138,6 @@ t_bool	execute_command(t_vars *vars)
 	//free(ret_file);
 	free(childs);
 	return (TRUE);
+	*/
+	return (0);
 }

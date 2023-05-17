@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:06:17 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/16 19:44:01 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/17 10:48:05 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,8 +149,9 @@ int	ft_dollard_to_string(char *line, t_vars *vars, int i)
 	vars->tmp_tok[vars->j] = ft_calloc(count + 2, sizeof(char));
 	count = 0;
 	i = start;
-	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i))
+	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i)/* && line[i + 1] != '|'*/)
 	{
+		i = ft_handle_quote(line, vars, i);
 		vars->tmp_tok[vars->j][count] = line[i];
 		i++;
 		count++;

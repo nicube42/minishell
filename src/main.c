@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:50:25 by ivautrav          #+#    #+#             */
-/*   Updated: 2023/05/17 08:48:20 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/17 10:20:41 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@ int	main(int ac, char *av[], char *envp[])
 		ft_parsing(input, &vars);
 		(void) tmp;
 		tmp = vars.first;
-		//if (ft_check_syntax(&vars))
-		//	execute_command(&vars);
+		if (ft_check_syntax(&vars))
+			execute_command(&vars);
 		ft_print_tokens(&vars);
 		ft_delete_all_tokens(&vars);
-		//ft_print_tokens(&vars);
 	}
 	return (0);
 }
