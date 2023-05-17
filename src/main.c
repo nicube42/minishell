@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:50:25 by ivautrav          #+#    #+#             */
-/*   Updated: 2023/05/16 21:45:15 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/17 08:48:20 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int ac, char *av[], char *envp[])
 		//	execute_command(&vars);
 		ft_print_tokens(&vars);
 		ft_delete_all_tokens(&vars);
-		ft_print_tokens(&vars);
+		//ft_print_tokens(&vars);
 	}
 	return (0);
 }
