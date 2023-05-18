@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/16 19:45:40 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:48:33 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,6 @@ int			ft_skip_blank(char *line, int i);
 int			ft_handle_quote(char *line, t_vars *vars, int i);
 
 int			ft_dollard_to_string(char *line, t_vars *vars, int i);
+int			ft_heredoc_to_string(char *line, t_vars *vars, int i);
 
 #endif

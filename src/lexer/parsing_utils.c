@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:06:17 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/17 10:48:05 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:31:57 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,20 +141,49 @@ int	ft_dollard_to_string(char *line, t_vars *vars, int i)
 
 	start = i;
 	count = 0;
-	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i))
+	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i) && line[i + 1] != '|' && line[i] != '$')
 	{
 		i++;
 		count++;
 	}
 	vars->tmp_tok[vars->j] = ft_calloc(count + 2, sizeof(char));
-	count = 0;
-	i = start;
-	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i)/* && line[i + 1] != '|'*/)
+	vars->tmp_tok[vars->j][0] = '$';
+	count = 1;
+	i = start + 1;
+	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i) && line[i + 1] != '|' && line[i] != '$')
 	{
 		i = ft_handle_quote(line, vars, i);
 		vars->tmp_tok[vars->j][count] = line[i];
 		i++;
 		count++;
+	}
+	vars->j++;
+	return (i);
+}
+
+int	ft_heredoc_to_string(char *line, t_vars *vars, int i)
+{
+	int	count;
+
+	count = 0;
+	i += 2;
+	i = ft_skip_blank(line, i);
+	while (!ft_is_blank(line[i]) && line[i] && !ft_is_separator(line, i) && line[i] != '$')
+	{
+		count++;
+		i++;
+	}
+	i -= count;
+	vars->tmp_tok[vars->j] = ft_calloc((count + 3), sizeof(char));
+	count = 0;
+	vars->tmp_tok[vars->j][count] = '<';
+	vars->tmp_tok[vars->j][count + 1] = '<';
+	count += 2;
+	while (!ft_is_blank(line[i]) && line[i] && !ft_is_separator(line, i) && line[i] != '$')
+	{
+		vars->tmp_tok[vars->j][count] = line[i];
+		count++;
+		i++;
 	}
 	vars->j++;
 	return (i);

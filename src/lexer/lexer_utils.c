@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:17:26 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/17 08:53:12 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:03:33 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int	ft_token_qty(char *str)
 			k++;
 		}
 		else if (ft_is_separator(str, i) && !quote && !dquote)
-			k ++;
+			k++;
 		else if (str[i] == '$' && !quote && !dquote)
-			k ++;
+			k++;
 		i++;
 	}
 	return (k);

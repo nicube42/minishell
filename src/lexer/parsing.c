@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/17 10:43:48 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:00:10 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	ft_parsing(char *line, t_vars *vars)
 			i = ft_pipe_to_string(line, vars, i);
 		else if (line[i] == '$')
 			i = ft_dollard_to_string(line, vars, i);
+		else if (ft_is_separator(line, i) == 3 && !vars->quote && !vars->dquote)
+			i = ft_heredoc_to_string(line, vars, i);
 		else if (vars->quote || vars->dquote)
 			i = ft_parse_inside_quote(line, vars, i);
 		else
