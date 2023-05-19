@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 08:54:06 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/19 09:22:30 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/19 10:08:21 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	ft_dollard_to_string(char *line, t_vars *vars, int i)
 
 	start = i;
 	count = 0;
-	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i) && line[i + 1] != '|' && line[i] != '$')
+	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i)
+		&& line[i + 1] != '|' && line[i] != '$')
 	{
 		i++;
 		count++;
@@ -28,7 +29,8 @@ int	ft_dollard_to_string(char *line, t_vars *vars, int i)
 	vars->tmp_tok[vars->j][0] = '$';
 	count = 1;
 	i = start + 1;
-	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i) && line[i + 1] != '|' && line[i] != '$')
+	while (line[i] && !ft_is_blank(line[i]) && !ft_is_separator(line, i)
+		&& line[i + 1] != '|' && line[i] != '$')
 	{
 		i = ft_handle_quote(line, vars, i);
 		vars->tmp_tok[vars->j][count] = line[i];

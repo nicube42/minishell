@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 09:27:44 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/16 19:27:11 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/19 10:06:27 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ int	ft_wrong_cmd_error(t_vars *vars)
 			while (token)
 			{
 				if (token->id == 10)
-					printf(RED "Unrecognised command : %s\n"RESET, ((t_cmd *)token->class)->content);
+					printf(RED "Unrecognised command : %s\n"RESET,
+						((t_cmd *)token->class)->content);
 				token = token->next;
 			}
 			return (1);

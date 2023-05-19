@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_creator.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 09:34:40 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/16 21:46:14 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/19 10:11:10 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,54 +81,6 @@ void	ft_print_tokens(t_vars *vars)
 			dollar = (t_dollar *)token->class;
 			printf("Token content : %s \n 			(dollar)(id = %d)\n", dollar->content, token->id);
 		}
-		token = token->next;
-	}
-}
-
-void	ft_delete_all_tokens(t_vars *vars)
-{
-	t_token		*token;
-	t_cmd		*cmd;
-	t_redir		*redir;
-	t_dollar	*dollar;
-	int			i;
-
-	token = vars->first;
-	while (token)
-	{
-		if (token->id >= 8 && token->id <= 10)
-		{
-			cmd = (t_cmd *)token->class;
-			i = 0;
-			//free(cmd->content);
-			cmd->content = NULL;
-			//free(cmd->path);
-			while (cmd->args[i])
-			{
-				//free (cmd->args[i]);
-				cmd->args[i] = NULL;
-				i++;
-			}
-			//free(cmd);
-		}
-		else if (token->id >= 1 && token->id <= 5)
-		{
-			redir = (t_redir *)token->class;
-			redir->content = 0;
-			redir->id = 0;
-			//free (redir);
-			redir = 0;
-		}
-		else if (token->id >= 6 && token->id <= 7)
-		{
-			dollar = (t_dollar *)token->class;
-			dollar->content = 0;
-			dollar ->id = 0;
-			//free (dollar);
-			dollar = 0;
-		}
-		token->id = 0;
-		token->class = 0;
 		token = token->next;
 	}
 }

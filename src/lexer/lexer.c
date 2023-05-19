@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:42:58 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/18 09:39:07 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/19 10:05:12 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,6 @@ char	**ft_sort_args(char **tmp, int	*i)
 		j++;
 		(*i)++;
 	}
-	/*args[j] = 0;
-	if (j > 0)
-	{
-		args[j] = ft_strdup(args[j - 1]);
-		args[j + 1] = 0;
-	}*/
 	return (args);
 }
 

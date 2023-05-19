@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/19 09:22:07 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/19 09:43:34 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,10 @@ void		ft_connect_token(t_token *list, t_token *to_add);
 void		ft_delete_all_tokens(t_vars *vars);
 void		ft_print_tokens(t_vars *vars);
 
-t_token		*ft_create_cmd_token(char *content, int id, char **args, t_vars *vars);
-t_cmd		*ft_init_cmd_token(char *content, int id, char **args, t_vars *vars);
+t_token		*ft_create_cmd_token(char *content, int id, char **args,
+				t_vars *vars);
+t_cmd		*ft_init_cmd_token(char *content, int id, char **args,
+				t_vars *vars);
 
 t_token		*ft_create_redir_token(char *content, int id);
 t_redir		*ft_init_redir_token(char *content, int id);

@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:15:59 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/19 09:19:00 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/19 10:06:08 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,27 +58,6 @@ int	ft_sep_or_doll(char *str, int i)
 	else if (str[i] == '$')
 		return (6);
 	return (0);
-}
-
-int	ft_check_cmd(char *tok, t_vars *vars)
-{
-	int		i;
-	char	*cmd;
-
-	i = -1;
-	vars->tmp_path = NULL;
-	while (vars->splitted_path[++i])
-	{
-		cmd = ft_strjoin(vars->splitted_path[i], tok);
-		if (access(cmd, F_OK) == 0)
-		{
-			vars->tmp_path = ft_strdup(cmd);
-			free(cmd);
-			return (0);
-		}
-		free(cmd);
-	}
-	return (1);
 }
 
 int	ft_is_builtin(char **tmp, int i)
