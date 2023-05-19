@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:44:16 by nicolasdiam       #+#    #+#             */
-/*   Updated: 2023/05/18 11:48:33 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/19 09:22:07 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,8 @@ int			ft_handle_quote(char *line, t_vars *vars, int i);
 
 int			ft_dollard_to_string(char *line, t_vars *vars, int i);
 int			ft_heredoc_to_string(char *line, t_vars *vars, int i);
+int			ft_red_entry_to_string(char *line, t_vars *vars, int i);
+
+int			ft_sep_or_doll(char *str, int i);
 
 #endif

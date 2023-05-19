@@ -6,7 +6,7 @@
 /*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:15:59 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/15 14:23:29 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/19 09:19:00 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,23 @@ int	ft_is_separator(char *str, int i)
 		return (4);
 	else if (str[i] == '|')
 		return (5);
+	return (0);
+}
+
+int	ft_sep_or_doll(char *str, int i)
+{
+	if (str[i] == '>' && str[i + 1] == '>')
+		return (1);
+	else if (str[i] == '>')
+		return (2);
+	else if (str[i] == '<' && str[i + 1] == '<')
+		return (3);
+	else if (str[i] == '<')
+		return (4);
+	else if (str[i] == '|')
+		return (5);
+	else if (str[i] == '$')
+		return (6);
 	return (0);
 }
 

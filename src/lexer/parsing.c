@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndiamant <ndiamant@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ndiamant <ndiamant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 08:59:14 by ndiamant          #+#    #+#             */
-/*   Updated: 2023/05/18 15:00:10 by ndiamant         ###   ########.fr       */
+/*   Updated: 2023/05/19 09:20:01 by ndiamant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,26 @@ int	ft_handle_quote(char *line, t_vars *vars, int i)
 	return (i);
 }
 
-int	ft_red_entry_to_string(char *line, t_vars *vars, int i)
+int	ft_select_type(char *line, t_vars *vars, int i)
 {
-	int	count;
-
-	count = 0;
-	i++;
+	i = ft_handle_quote(line, vars, i);
+	if (ft_sep_or_doll(line, i) == 4 && !vars->quote && !vars->dquote)
+		i = ft_red_entry_to_string(line, vars, i);
+	else if (ft_sep_or_doll(line, i) == 2 && !vars->quote && !vars->dquote)
+		i = ft_red_exit_to_string(line, vars, i);
+	else if (ft_sep_or_doll(line, i) == 1 && !vars->quote && !vars->dquote)
+		i = ft_append_to_string(line, vars, i);
+	else if (ft_sep_or_doll(line, i) == 5 && !vars->quote && !vars->dquote)
+		i = ft_pipe_to_string(line, vars, i);
+	else if (line[i] == '$' && !vars->quote && !vars->dquote)
+		i = ft_dollard_to_string(line, vars, i);
+	else if (ft_sep_or_doll(line, i) == 3 && !vars->quote && !vars->dquote)
+		i = ft_heredoc_to_string(line, vars, i);
+	else if (vars->quote || vars->dquote)
+		i = ft_parse_inside_quote(line, vars, i);
+	else
+		i = ft_cmd_to_string(line, vars, i);
 	i = ft_skip_blank(line, i);
-	while (!ft_is_blank(line[i]) && line[i] && !ft_is_separator(line, i) && line[i] != '$')
-	{
-		count++;
-		i++;
-	}
-	i -= count;
-	vars->tmp_tok[vars->j] = ft_calloc((count + 2), sizeof(char));
-	count = 0;
-	vars->tmp_tok[vars->j][count] = '<';
-	count++;
-	while (!ft_is_blank(line[i]) && line[i] && !ft_is_separator(line, i) && line[i] != '$')
-	{
-		vars->tmp_tok[vars->j][count] = line[i];
-		count++;
-		i++;
-	}
-	i = ft_skip_blank(line, i);
-	vars->j++;
 	return (i);
 }
 
@@ -76,26 +71,7 @@ void	ft_parsing(char *line, t_vars *vars)
 	vars->dquote = 0;
 	i = ft_skip_blank(line, i);
 	while (line[i])
-	{
-		i = ft_handle_quote(line, vars, i);
-		if (ft_is_separator(line, i) == 4 && !vars->quote && !vars->dquote)
-			i = ft_red_entry_to_string(line, vars, i);
-		else if (ft_is_separator(line, i) == 2 && !vars->quote && !vars->dquote)
-			i = ft_red_exit_to_string(line, vars, i);
-		else if (ft_is_separator(line, i) == 1 && !vars->quote && !vars->dquote)
-			i = ft_append_to_string(line, vars, i);
-		else if (ft_is_separator(line, i) == 5 && !vars->quote && !vars->dquote)
-			i = ft_pipe_to_string(line, vars, i);
-		else if (line[i] == '$')
-			i = ft_dollard_to_string(line, vars, i);
-		else if (ft_is_separator(line, i) == 3 && !vars->quote && !vars->dquote)
-			i = ft_heredoc_to_string(line, vars, i);
-		else if (vars->quote || vars->dquote)
-			i = ft_parse_inside_quote(line, vars, i);
-		else
-			i = ft_cmd_to_string(line, vars, i);
-		i = ft_skip_blank(line, i);
-	}
+		i = ft_select_type(line, vars, i);
 	ft_sort_tokens(vars->tmp_tok, vars);
 }
 
